@@ -76,3 +76,30 @@ Example of a simple policy:
     }
   ]
 }
+
+# 🎭 AWS IAM Roles – Quick Overview
+
+## What is an IAM Role?
+An **IAM Role** is a temporary identity in AWS that provides specific permissions and is assumed by trusted entities like AWS services, IAM users, or external identities. Unlike users, roles do not have permanent credentials.
+
+## Why Use Roles?
+- Grant **temporary access** to AWS resources
+- Enable **services like EC2/Lambda** to interact with other AWS services
+- Allow **cross-account** or **federated access** securely
+
+## Key Components:
+- **Trust Policy**: Defines who can assume the role (e.g., EC2)
+- **Permissions Policy**: Defines what actions the role allows
+
+## Example Use Cases:
+- EC2 instance accessing S3
+- Granting admin access to a user for a short period
+- Enabling SSO via Google or Active Directory
+
+## Best Practices:
+- Follow **least privilege principle**
+- Monitor role usage
+- Use **CloudTrail** for auditing
+
+> IAM Roles = Secure, flexible, temporary access across AWS.
+

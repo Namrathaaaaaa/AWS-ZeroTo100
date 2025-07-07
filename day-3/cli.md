@@ -14,6 +14,18 @@ The **AWS Command Line Interface (AWS CLI)** is a tool that enables you to inter
 
 ---
 
+```bash
+aws configure
+aws s3 mb s3://my-new-bucket
+aws s3 ls
+aws s3 cp file.txt s3://my-new-bucket/
+aws s3 cp s3://my-new-bucket/file.txt .
+aws s3 sync ./local-folder s3://my-new-bucket/
+aws ec2 describe-instances
+aws ec2 start-instances --instance-ids i-1234567890abcdef0
+aws ec2 stop-instances --instance-ids i-1234567890abcdef0
+aws ec2 create-key-pair --key-name MyKeyPair
+```
 
 
 

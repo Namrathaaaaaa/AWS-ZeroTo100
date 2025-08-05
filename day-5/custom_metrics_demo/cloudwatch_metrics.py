@@ -2,7 +2,7 @@ from flask import Flask
 import time
 import random
 import boto3
-
+import yolo
 
 app = Flask(__name__)
 

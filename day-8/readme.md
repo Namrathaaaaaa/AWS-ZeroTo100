@@ -6,6 +6,12 @@ Deploy a web application on **Amazon EKS** with **Ingress Controller** for exter
 
 **Architecture:** App → Docker → EKS → Ingress → ALB → Internet
 
+## 📸 Project Result
+
+<img width="1009" height="875" alt="Image" src="https://github.com/user-attachments/assets/a75816be-2183-4c24-8dc5-995a97f0dcec" />
+
+*Successfully deployed application accessible via AWS Load Balancer with Kubernetes orchestration*
+
 ---
 
 ## 🛠️ Prerequisites

@@ -12,17 +12,18 @@
 
 Understanding where load balancers operate in the network stack:
 
-| Layer | Name | Function | Examples |
-|-------|------|----------|----------|
-| **7** | **Application** | User interfaces, apps | HTTP, HTTPS, FTP |
-| **6** | **Presentation** | Data encryption/formatting | SSL/TLS, JPEG |
-| **5** | **Session** | Manages connections | NetBIOS, SQL |
-| **4** | **Transport** | End-to-end delivery | **TCP, UDP** |
-| **3** | **Network** | Routing between networks | **IP, ICMP** |
-| **2** | **Data Link** | Node-to-node delivery | Ethernet, WiFi |
-| **1** | **Physical** | Physical transmission | Cables, signals |
+| Layer | Name             | Function                   | Examples         |
+| ----- | ---------------- | -------------------------- | ---------------- |
+| **7** | **Application**  | User interfaces, apps      | HTTP, HTTPS, FTP |
+| **6** | **Presentation** | Data encryption/formatting | SSL/TLS, JPEG    |
+| **5** | **Session**      | Manages connections        | NetBIOS, SQL     |
+| **4** | **Transport**    | End-to-end delivery        | **TCP, UDP**     |
+| **3** | **Network**      | Routing between networks   | **IP, ICMP**     |
+| **2** | **Data Link**    | Node-to-node delivery      | Ethernet, WiFi   |
+| **1** | **Physical**     | Physical transmission      | Cables, signals  |
 
 **🔑 Key for Load Balancers:**
+
 - **Layer 4 (Transport)**: Routes based on IP + Port
 - **Layer 7 (Application)**: Routes based on content (HTTP headers, URLs)
 
@@ -35,6 +36,7 @@ Understanding where load balancers operate in the network stack:
 **Best for:** Web applications, HTTP/HTTPS traffic, microservices
 
 **Features:**
+
 - Content-based routing (URLs, headers)
 - Host-based routing
 - WebSocket support
@@ -50,6 +52,7 @@ aws elbv2 create-load-balancer \
 ```
 
 **Use Cases:**
+
 - ✅ Web applications with multiple services
 - ✅ Microservices architecture
 - ✅ Content-based routing needs
@@ -60,6 +63,7 @@ aws elbv2 create-load-balancer \
 **Best for:** High-performance, low-latency, TCP/UDP traffic
 
 **Features:**
+
 - Ultra-high performance (millions of requests/sec)
 - Static IP addresses
 - Preserves source IP
@@ -76,6 +80,7 @@ aws elbv2 create-load-balancer \
 ```
 
 **Use Cases:**
+
 - ✅ Gaming applications
 - ✅ IoT applications
 - ✅ High-frequency trading
@@ -87,6 +92,7 @@ aws elbv2 create-load-balancer \
 **Best for:** Third-party network appliances, security tools
 
 **Features:**
+
 - Transparent network gateway
 - Traffic inspection
 - Firewall integration
@@ -102,6 +108,7 @@ aws elbv2 create-load-balancer \
 ```
 
 **Use Cases:**
+
 - ✅ Network security appliances
 - ✅ Firewalls and IDS/IPS
 - ✅ Traffic inspection tools
@@ -113,14 +120,16 @@ aws elbv2 create-load-balancer \
 ## 🏗️ Real-World Architecture Examples
 
 ### E-commerce Website (ALB)
+
 ```
 Users → ALB → Target Groups:
                 ├── /api/* → API Servers
-                ├── /images/* → Image Servers  
+                ├── /images/* → Image Servers
                 └── /* → Web Servers
 ```
 
 ### Gaming Platform (NLB)
+
 ```
 Game Clients → NLB → Game Servers
                   ├── TCP:3000 → Match Server
@@ -129,6 +138,7 @@ Game Clients → NLB → Game Servers
 ```
 
 ### Enterprise Security (GWLB)
+
 ```
 Internet → GWLB → Security Appliances → Internal Network
                     ├── Firewall 1
@@ -140,22 +150,23 @@ Internet → GWLB → Security Appliances → Internal Network
 
 ## 📊 Load Balancer Comparison
 
-| Feature | ALB (Layer 7) | NLB (Layer 4) | GWLB (Layer 3) |
-|---------|---------------|---------------|----------------|
-| **Performance** | High | Ultra-high | High |
-| **Latency** | ~100ms | ~1ms | Low |
-| **Protocols** | HTTP/HTTPS | TCP/UDP/TLS | All IP traffic |
-| **Routing** | Content-based | IP/Port-based | Transparent |
-| **SSL Termination** | ✅ Yes | ✅ Yes | ❌ No |
-| **Static IP** | ❌ No | ✅ Yes | ✅ Yes |
-| **WebSockets** | ✅ Yes | ✅ Yes | ✅ Yes |
-| **Cost** | Moderate | Low | Moderate |
+| Feature             | ALB (Layer 7) | NLB (Layer 4) | GWLB (Layer 3) |
+| ------------------- | ------------- | ------------- | -------------- |
+| **Performance**     | High          | Ultra-high    | High           |
+| **Latency**         | ~100ms        | ~1ms          | Low            |
+| **Protocols**       | HTTP/HTTPS    | TCP/UDP/TLS   | All IP traffic |
+| **Routing**         | Content-based | IP/Port-based | Transparent    |
+| **SSL Termination** | ✅ Yes        | ✅ Yes        | ❌ No          |
+| **Static IP**       | ❌ No         | ✅ Yes        | ✅ Yes         |
+| **WebSockets**      | ✅ Yes        | ✅ Yes        | ✅ Yes         |
+| **Cost**            | Moderate      | Low           | Moderate       |
 
 ---
 
 ## 🛠️ Configuration Examples
 
 ### ALB with Path-Based Routing
+
 ```yaml
 # ALB Target Groups
 /api/users → User Service (Port 3001)
@@ -165,6 +176,7 @@ Internet → GWLB → Security Appliances → Internal Network
 ```
 
 ### NLB with Health Checks
+
 ```bash
 # Create target group for NLB
 aws elbv2 create-target-group \
@@ -177,9 +189,10 @@ aws elbv2 create-target-group \
 ```
 
 ### GWLB with Security Integration
+
 ```yaml
 # Security inspection flow
-Internet Traffic → GWLB Endpoint → Security Appliance → 
+Internet Traffic → GWLB Endpoint → Security Appliance →
 Application Subnets → Response through same path
 ```
 
@@ -188,6 +201,7 @@ Application Subnets → Response through same path
 ## 🔐 Security & Best Practices
 
 ### SSL/TLS Configuration
+
 ```bash
 # Add HTTPS listener to ALB
 aws elbv2 create-listener \
@@ -198,6 +212,7 @@ aws elbv2 create-listener \
 ```
 
 ### Security Groups
+
 ```json
 {
   "GroupName": "ALB-SecurityGroup",
@@ -210,7 +225,7 @@ aws elbv2 create-listener \
       "CidrIp": "0.0.0.0/0"
     },
     {
-      "IpProtocol": "tcp", 
+      "IpProtocol": "tcp",
       "FromPort": 443,
       "ToPort": 443,
       "CidrIp": "0.0.0.0/0"
@@ -224,6 +239,7 @@ aws elbv2 create-listener \
 ## 📈 Monitoring & Troubleshooting
 
 ### Key Metrics
+
 ```bash
 # CloudWatch metrics to monitor
 RequestCount          # Total requests
@@ -234,23 +250,26 @@ ActiveConnectionCount  # Current connections (NLB)
 ```
 
 ### Common Issues
-| Issue | Load Balancer | Solution |
-|-------|---------------|----------|
-| **High latency** | ALB | Check target response time, optimize backends |
-| **Connection timeouts** | NLB | Verify security groups and NACLs |
-| **503 errors** | ALB | Check target health, scaling policies |
-| **Unhealthy targets** | All | Review health check configuration |
+
+| Issue                   | Load Balancer | Solution                                      |
+| ----------------------- | ------------- | --------------------------------------------- |
+| **High latency**        | ALB           | Check target response time, optimize backends |
+| **Connection timeouts** | NLB           | Verify security groups and NACLs              |
+| **503 errors**          | ALB           | Check target health, scaling policies         |
+| **Unhealthy targets**   | All           | Review health check configuration             |
 
 ---
 
 ## 💰 Cost Optimization
 
 ### Pricing Overview
+
 - **ALB**: $0.0225/hour + $0.008/LCU-hour
-- **NLB**: $0.0225/hour + $0.006/NLCU-hour  
+- **NLB**: $0.0225/hour + $0.006/NLCU-hour
 - **GWLB**: $0.0125/hour + $0.004/GLCU-hour
 
 ### Cost Tips
+
 ```bash
 # Use target group deregistration delay
 aws elbv2 modify-target-group-attributes \
@@ -266,6 +285,7 @@ aws elbv2 modify-target-group-attributes \
 ## 🎯 When to Use Each Type
 
 ### Choose ALB when:
+
 - ✅ HTTP/HTTPS applications
 - ✅ Microservices with different endpoints
 - ✅ Need content-based routing
@@ -273,6 +293,7 @@ aws elbv2 modify-target-group-attributes \
 - ✅ SSL termination needed
 
 ### Choose NLB when:
+
 - ✅ Non-HTTP protocols (TCP/UDP)
 - ✅ Ultra-low latency required
 - ✅ Static IP addresses needed
@@ -280,6 +301,7 @@ aws elbv2 modify-target-group-attributes \
 - ✅ Gaming or IoT applications
 
 ### Choose GWLB when:
+
 - ✅ Network security appliances
 - ✅ Traffic inspection required
 - ✅ Third-party security tools
@@ -294,7 +316,7 @@ aws elbv2 modify-target-group-attributes \
 Need security appliance integration? → GWLB
     ↓ No
 Need HTTP/HTTPS routing? → ALB
-    ↓ No  
+    ↓ No
 Need ultra-high performance? → NLB
     ↓ No
 Default choice → ALB

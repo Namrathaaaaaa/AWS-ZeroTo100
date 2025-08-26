@@ -10,7 +10,7 @@ Deploy a web application on **Amazon EKS** with **Ingress Controller** for exter
 
 <img width="1009" height="875" alt="Image" src="https://github.com/user-attachments/assets/a75816be-2183-4c24-8dc5-995a97f0dcec" />
 
-*Successfully deployed application accessible via AWS Load Balancer with Kubernetes orchestration*
+_Successfully deployed application accessible via AWS Load Balancer with Kubernetes orchestration_
 
 ---
 
@@ -60,10 +60,10 @@ spec:
         app: react-app
     spec:
       containers:
-      - name: react-app
-        image: nginx:alpine
-        ports:
-        - containerPort: 80
+        - name: react-app
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -73,8 +73,8 @@ spec:
   selector:
     app: react-app
   ports:
-  - port: 80
-    targetPort: 80
+    - port: 80
+      targetPort: 80
   type: ClusterIP
 ```
 
@@ -124,15 +124,15 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: react-app-service
-            port:
-              number: 80
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: react-app-service
+                port:
+                  number: 80
 ```
 
 ```bash
@@ -164,11 +164,11 @@ curl http://$ALB_URL
 
 ## 🆘 Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| **Pods pending** | `kubectl describe nodes` - check capacity |
+| Issue             | Solution                                                  |
+| ----------------- | --------------------------------------------------------- |
+| **Pods pending**  | `kubectl describe nodes` - check capacity                 |
 | **Ingress no IP** | `kubectl get pods -n kube-system` - verify ALB controller |
-| **503 errors** | `kubectl get endpoints` - check service endpoints |
+| **503 errors**    | `kubectl get endpoints` - check service endpoints         |
 
 ---
 

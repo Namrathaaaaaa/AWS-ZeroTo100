@@ -194,4 +194,3 @@ Internet → ALB → EKS Nodes → Pods
 
 **🚀 Result: Scalable web application accessible via AWS Load Balancer!**
 
-happy leaning

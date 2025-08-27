@@ -1,3 +1,3 @@
 # AWS-ZeroTo100
 aws 
-zero to hero weres
+zero to hero 

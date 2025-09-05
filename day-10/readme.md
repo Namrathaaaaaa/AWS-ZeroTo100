@@ -18,7 +18,7 @@
 - Assess cloud readiness and dependencies
 - Define business objectives and team
 
-### 2. 📊 Planning
+### 2. 📊 Planning of the 
 
 **Goal:** Create detailed migration roadmap
 
